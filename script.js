@@ -66,8 +66,22 @@ const createBox = (item) => {
     <p class="info">${text}</p>
     `;
 
+    box.addEventListener('click', () => {
+        setTextMessage(text);
+        speakText();
+        // Add active effect
+        box.classList.add('active');
+
+        setTimeout(() => {
+            box.classList.remove('active');
+        }, 800);
+    });
+
     main.appendChild(box);
 };
+
+// Init speech synth
+const message = new SpeechSynthesisUtterance();
 
 // Store voices
 const getVoices = () => {
@@ -82,6 +96,20 @@ const getVoices = () => {
     });
 };
 
+// Set text
+const setTextMessage = (text) => {
+    message.text = text;
+};
+
+const setVoice = (e) => {
+    message.voice = voices.find((voice) => voice.name === e.target.value);
+};
+
+// Speak text
+const speakText = (text) => {
+    speechSynthesis.speak(message);
+};
+
 // Voices changed
 speechSynthesis.addEventListener('voiceschanged', getVoices);
 
@@ -94,6 +122,14 @@ toggleBtn.addEventListener('click', () =>
 closeBtn.addEventListener('click', () =>
     document.getElementById('text-box').classList.toggle('show')
 );
+
+// Set voice
+voicesSelect.addEventListener('change', setVoice);
+
+readBtn.addEventListener('click', () => {
+    setTextMessage(textarea.value);
+    speakText();
+});
 
 data.forEach(createBox);
 
