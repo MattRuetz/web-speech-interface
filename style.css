@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root {
-    --color1: #f9d371;
-    --color2: #f47340;
-    --color3: #ef2f88;
-    --color4: #8843f2;
+    --color1: #eeedde;
+    --color2: #e0ddaa;
+    --color3: #203239;
+    --color4: #141e27;
 }
 
 * {
@@ -30,15 +30,17 @@ h1 {
 .btn {
     cursor: pointer;
     background-color: var(--color2);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
     border: 0;
     border-radius: 4px;
-    color: white;
+    color: var(--color3);
     font-size: 16px;
     padding: 8px;
 }
 
 .btn:active {
     transform: scale(0.97);
+    box-shadow: none;
 }
 
 .btn:focus,
@@ -62,7 +64,11 @@ select:focus {
     color: white;
     padding: 20px;
     border-radius: 8px;
-    transition: all 1s ease-in-out;
+    transition: transform 0.5s ease-in-out;
+}
+
+.text-box.show {
+    transform: translate(-50%, 0);
 }
 
 .text-box select {
